@@ -3,7 +3,9 @@
 sql2gorm is a command line tool to generate Go code with [Gorm](https://gorm.io/) Tag and Json Tag from SQL.
 
 Web tool: https://sql2gorm.mccode.info/
-
+```
+./sql2gorm -with-type -null-style ptr -no-null -json -table-prefix t_ -f /xx.sql -o model.go
+```
 ## Download
 
 ```
