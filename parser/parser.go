@@ -2,11 +2,11 @@ package parser
 
 import (
 	"fmt"
-	"github.com/jinzhu/inflection"
 	"github.com/blastrain/vitess-sqlparser/tidbparser/ast"
 	"github.com/blastrain/vitess-sqlparser/tidbparser/dependency/mysql"
 	"github.com/blastrain/vitess-sqlparser/tidbparser/dependency/types"
 	"github.com/blastrain/vitess-sqlparser/tidbparser/parser"
+	"github.com/jinzhu/inflection"
 	"github.com/pkg/errors"
 	"go/format"
 	"io"
@@ -160,6 +160,12 @@ func makeCode(stmt *ast.CreateTableStmt, opt options) (string, []string, error) 
 		}
 		if isPrimaryKey[colName] {
 			gormTag.WriteString(";primary_key")
+		}
+		if colName == "create_time" {
+			gormTag.WriteString(";autoCreateTime:milli")
+		}
+		if colName == "update_time" {
+			gormTag.WriteString(";autoUpdateTime:milli")
 		}
 		isNotNull := false
 		canNull := false
